@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Documentation</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; }
+  #navbar { position: fixed; top: 0; left: 0; width: 240px; height: 100vh; background:#f4f4f4; padding: 1rem; overflow-y: auto; border-right:1px solid #ddd; }
+  #navbar header { font-weight:bold; font-size:1.1rem; margin-bottom: 1rem; }
+  #navbar a { display:block; padding: 0.5rem; color:#222; text-decoration: none; border-top:1px solid #ddd; }
+  #main-doc { margin-left: 260px; padding: 1rem 2rem; max-width: 900px; }
+  .main-section { margin-bottom: 2.5rem; }
+  code { background:#eee; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.95em; }
+  @media (max-width: 800px) {
+    #navbar { position: static; width: 100%; height: auto; }
+    #main-doc { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <header>JS Documentation</header>
+  <a class="nav-link" href="#Introduction">Introduction</a>
+  <a class="nav-link" href="#Variables">Variables</a>
+  <a class="nav-link" href="#Functions">Functions</a>
+  <a class="nav-link" href="#Loops">Loops</a>
+  <a class="nav-link" href="#Reference">Reference</a>
+</nav>
+<main id="main-doc">
+  <section class="main-section" id="Introduction">
+    <header>Introduction</header>
+    <p>JavaScript is a high-level, interpreted programming language used to make web pages interactive.</p>
+    <p>It runs in browsers and on servers (Node.js).</p>
+    <ul>
+      <li>Dynamic typing</li>
+      <li>First-class functions</li>
+      <li>Event-driven</li>
+    </ul>
+  </section>
+  <section class="main-section" id="Variables">
+    <header>Variables</header>
+    <p>Use <code>let</code> for reassignable, <code>const</code> for constant references.</p>
+    <code>let counter = 0;</code>
+    <code>const PI = 3.14159;</code>
+    <p>Avoid <code>var</code> due to hoisting.</p>
+  </section>
+  <section class="main-section" id="Functions">
+    <header>Functions</header>
+    <p>Functions are first-class citizens.</p>
+    <code>function greet(name) { return `Hello ${name}`; }</code>
+    <code>const add = (a, b) => a + b;</code>
+    <p>Arrow functions don't bind their own this.</p>
+  </section>
+  <section class="main-section" id="Loops">
+    <header>Loops</header>
+    <code>for (let i = 0; i < 10; i++) {}</code>
+    <code>arr.forEach(x => console.log(x));</code>
+    <code>for (const item of items) {}</code>
+    <p>Prefer functional iteration where possible.</p>
+  </section>
+  <section class="main-section" id="Reference">
+    <header>Reference</header>
+    <p>See MDN Web Docs for full reference.</p>
+  </section>
+</main>
+</body>
+</html>

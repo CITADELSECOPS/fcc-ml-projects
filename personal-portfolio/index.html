@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Evgeny Puchinsky — Portfolio</title>
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  body { font-family: system-ui, sans-serif; margin: 0; color:#eee; background:#1a1a1a; }
+  #navbar { position: fixed; top: 0; width: 100%; background:#222; padding: 1rem 2rem; display:flex; justify-content:flex-end; gap: 1.5rem; z-index:10; }
+  #navbar a { color:#fff; text-decoration:none; }
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+  #welcome-section { min-height: 100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; }
+  #welcome-section h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin: 0; }
+  #welcome-section p { color:#bbb; font-style: italic; }
+  #projects { background:#2a2a2a; }
+  .projects-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .project-tile { background:#1a1a1a; padding: 1.5rem; border-radius: 8px; }
+  .project-tile h3 { margin-top: 0; }
+  #profile-link { background:#5d4037; color:#fff; padding: 0.6rem 1.5rem; border-radius: 4px; text-decoration:none; display:inline-block; }
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="#welcome-section">About</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="welcome-section">
+  <h1>Hi, I'm Evgeny Puchinsky</h1>
+  <p>Engineer working with AI/ML and modern web technologies</p>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects-grid">
+    <div class="project-tile">
+      <h3>FCC Machine Learning</h3>
+      <p>5 TensorFlow projects: Rock Paper Scissors, Cat/Dog Classifier, Book Recommender, Health Costs, SMS Classifier.</p>
+      <a class="project-link" href="https://github.com/CITADELSECOPS/fcc-ml-projects/tree/main">View on GitHub</a>
+    </div>
+    <div class="project-tile">
+      <h3>Data Analysis with Python</h3>
+      <p>5 pandas/numpy projects covering data cleaning, visualization, time series.</p>
+      <a class="project-link" href="https://github.com/CITADELSECOPS/fcc-ml-projects/tree/main">View on GitHub</a>
+    </div>
+    <div class="project-tile">
+      <h3>College Algebra with Python</h3>
+      <p>Multi-function calculator, graphing, math games, financial calculator, data explorer.</p>
+      <a class="project-link" href="https://github.com/CITADELSECOPS/fcc-ml-projects/tree/main">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <a id="profile-link" href="https://github.com/CITADELSECOPS" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+</section>
+</body>
+</html>

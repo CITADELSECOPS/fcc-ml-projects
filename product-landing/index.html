@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OmniBrew — Premium Espresso Machines</title>
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  body { font-family: system-ui, sans-serif; margin: 0; color:#222; }
+  header { position: sticky; top: 0; background:#fff; border-bottom:1px solid #eee; padding: 1rem 2rem; display:flex; align-items:center; justify-content:space-between; z-index:10; }
+  #header-img { height: 40px; }
+  #nav-bar { display:flex; gap: 1.5rem; }
+  .nav-link { text-decoration:none; color:#333; }
+  section { padding: 3rem 2rem; max-width: 1100px; margin: 0 auto; }
+  #features { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.5rem; }
+  .feature { padding:1rem; border:1px solid #eee; border-radius:6px; }
+  #video { width: 100%; max-width: 560px; aspect-ratio: 16/9; display:block; margin:0 auto; }
+  #form { display:flex; flex-direction: column; gap: 0.5rem; max-width: 400px; margin: 0 auto; }
+  #email { padding: 0.5rem; border:1px solid #ccc; border-radius:4px; }
+  #submit { padding: 0.6rem 1rem; background:#5d4037; color:#fff; border:0; cursor:pointer; border-radius:4px; }
+</style>
+</head>
+<body>
+<header id="header">
+  <img id="header-img" src="https://via.placeholder.com/180x40?text=OmniBrew" alt="OmniBrew logo">
+  <nav id="nav-bar">
+    <a class="nav-link" href="#features">Features</a>
+    <a class="nav-link" href="#how-it-works">How it works</a>
+    <a class="nav-link" href="#pricing">Pricing</a>
+  </nav>
+</header>
+
+<section>
+  <h1>Brew café-quality espresso at home</h1>
+  <p>Precision temperature control, 9-bar extraction, app-connected.</p>
+  <form id="form" action="https://www.freecodecamp.org/email-submit">
+    <input id="email" type="email" name="email" placeholder="Your email" required>
+    <input id="submit" type="submit" value="Get Started">
+  </form>
+</section>
+
+<section id="features">
+  <div class="feature"><h3>9-bar Extraction</h3><p>Italian pump delivers consistent 9-bar pressure.</p></div>
+  <div class="feature"><h3>PID Temperature</h3><p>±0.5°C accuracy across every shot.</p></div>
+  <div class="feature"><h3>App Connected</h3><p>Recipes synced over Wi-Fi.</p></div>
+</section>
+
+<section id="how-it-works">
+  <h2>How it works</h2>
+  <iframe id="video" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+</section>
+
+<section id="pricing">
+  <h2>Pricing</h2>
+  <ul>
+    <li>Starter — $399</li>
+    <li>Pro — $699</li>
+    <li>Master — $1199</li>
+  </ul>
+</section>
+</body>
+</html>

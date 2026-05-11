@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Survey Form</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 600px; margin: 2rem auto; padding: 1rem; background:#f7f7f7;}
+  h1, p { text-align: center; }
+  fieldset { border: 1px solid #ddd; padding: 1rem; margin-bottom: 1rem; background:#fff;}
+  label { display: block; margin-bottom: 0.5rem; }
+  input[type=text], input[type=email], input[type=number], textarea, select { width: 100%; padding: 0.5rem; box-sizing: border-box; }
+  input[type=submit] { background:#4caf50; color:#fff; border:0; padding:0.7rem 1.5rem; cursor:pointer; }
+</style>
+</head>
+<body>
+<h1 id="title">Customer Feedback Survey</h1>
+<p id="description">Tell us what we can do better</p>
+<form id="survey-form">
+  <fieldset>
+    <label id="name-label">Name <input id="name" type="text" placeholder="Your name" required></label>
+    <label id="email-label">Email <input id="email" type="email" placeholder="you@example.com" required></label>
+    <label id="number-label">Age <input id="number" type="number" placeholder="18" min="10" max="120"></label>
+    <label>What is your favorite product?
+      <select id="dropdown">
+        <option value="">Select...</option>
+        <option>Pro</option>
+        <option>Standard</option>
+        <option>Basic</option>
+      </select>
+    </label>
+    <p>Recommend to a friend?</p>
+    <label><input type="radio" name="recommend" value="yes"> Yes</label>
+    <label><input type="radio" name="recommend" value="no"> No</label>
+    <p>Areas to improve (check all):</p>
+    <label><input type="checkbox" value="ux"> UX</label>
+    <label><input type="checkbox" value="performance"> Performance</label>
+    <label><input type="checkbox" value="support"> Support</label>
+    <label>Comments <textarea rows="4" placeholder="Tell us more"></textarea></label>
+    <input id="submit" type="submit" value="Submit">
+  </fieldset>
+</form>
+</body>
+</html>
