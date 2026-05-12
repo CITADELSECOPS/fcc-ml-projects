@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Palindrome Checker</title></head>
+<body>
+<h1>Palindrome Checker</h1>
+<script>
+function palindrome(str) {
+  const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return cleaned === cleaned.split('').reverse().join('');
+}
+console.log(palindrome('eye'));
+console.log(palindrome('_eye'));
+console.log(palindrome('race car'));
+console.log(palindrome('not a palindrome'));
+console.log(palindrome('A man, a plan, a canal. Panama'));
+</script>
+</body>
+</html>

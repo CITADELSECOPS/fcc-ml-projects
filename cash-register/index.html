@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Cash Register</title></head>
+<body>
+<h1>Cash Register</h1>
+<script>
+const denominations = [
+  ['ONE HUNDRED', 10000], ['TWENTY', 2000], ['TEN', 1000],
+  ['FIVE', 500], ['ONE', 100], ['QUARTER', 25], ['DIME', 10],
+  ['NICKEL', 5], ['PENNY', 1]
+];
+
+function checkCashRegister(price, cash, cid) {
+  let changeDue = Math.round(cash * 100 - price * 100);
+  const drawer = cid.map(([name, amt]) => [name, Math.round(amt * 100)]);
+  const totalCID = drawer.reduce((s, [, c]) => s + c, 0);
+  if (totalCID < changeDue) return { status: "INSUFFICIENT_FUNDS", change: [] };
+  if (totalCID === changeDue) return { status: "CLOSED", change: cid };
+  const change = [];
+  for (const [name, value] of denominations) {
+    const idx = drawer.findIndex(d => d[0] === name);
+    if (idx === -1) continue;
+    let available = drawer[idx][1];
+    let used = 0;
+    while (available >= value && changeDue >= value) {
+      available -= value; changeDue -= value; used += value;
+    }
+    if (used > 0) change.push([name, used / 100]);
+  }
+  if (changeDue > 0) return { status: "INSUFFICIENT_FUNDS", change: [] };
+  return { status: "OPEN", change };
+}
+
+console.log(checkCashRegister(19.5, 20, [["PENNY",1.01],["NICKEL",2.05],["DIME",3.1],["QUARTER",4.25],["ONE",90],["FIVE",55],["TEN",20],["TWENTY",60],["ONE HUNDRED",100]]));
+</script>
+</body>
+</html>

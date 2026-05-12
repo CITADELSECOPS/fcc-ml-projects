@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Caesars Cipher</title></head>
+<body>
+<h1>Caesars Cipher (ROT13)</h1>
+<script>
+function rot13(str) {
+  return str.split('').map(c => {
+    const code = c.charCodeAt(0);
+    if (code >= 65 && code <= 90) return String.fromCharCode((code - 65 + 13) % 26 + 65);
+    if (code >= 97 && code <= 122) return String.fromCharCode((code - 97 + 13) % 26 + 97);
+    return c;
+  }).join('');
+}
+console.log(rot13("SERR PBQR PNZC"));
+console.log(rot13("SERR CVMMN!"));
+console.log(rot13("SERR YBIR?"));
+console.log(rot13("GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT."));
+</script>
+</body>
+</html>

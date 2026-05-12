@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Roman Numeral Converter</title></head>
+<body>
+<h1>Roman Numeral Converter</h1>
+<script>
+function convertToRoman(num) {
+  const vals = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+  const syms = ['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'];
+  let out = '';
+  for (let i = 0; i < vals.length; i++) {
+    while (num >= vals[i]) { out += syms[i]; num -= vals[i]; }
+  }
+  return out;
+}
+console.log(convertToRoman(2));
+console.log(convertToRoman(9));
+console.log(convertToRoman(36));
+console.log(convertToRoman(1994));
+console.log(convertToRoman(3999));
+</script>
+</body>
+</html>
