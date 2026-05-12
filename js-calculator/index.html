@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>JavaScript Calculator</title>
+<style>button { padding: 1rem; margin: 2px; font-size: 1.2rem; } #display { padding: 1rem; background: #222; color: #fff; font-size: 1.5rem; min-height: 2rem; }</style>
+</head>
+<body>
+<div id="calculator">
+<div id="display">0</div>
+<button id="clear">AC</button>
+<button id="divide">/</button>
+<button id="multiply">x</button>
+<button id="seven">7</button>
+<button id="eight">8</button>
+<button id="nine">9</button>
+<button id="subtract">-</button>
+<button id="four">4</button>
+<button id="five">5</button>
+<button id="six">6</button>
+<button id="add">+</button>
+<button id="one">1</button>
+<button id="two">2</button>
+<button id="three">3</button>
+<button id="equals">=</button>
+<button id="zero">0</button>
+<button id="decimal">.</button>
+</div>
+<script>
+const display = document.getElementById('display');
+let current = '0';
+let stored = null;
+let pending = null;
+const apply = (a, b, op) => {
+  a = parseFloat(a); b = parseFloat(b);
+  if (op === '+') return a + b;
+  if (op === '-') return a - b;
+  if (op === '*') return a * b;
+  if (op === '/') return b === 0 ? 0 : a / b;
+  return b;
+};
+const inputDigit = d => {
+  if (current === '0') current = d;
+  else current += d;
+  display.textContent = current;
+};
+const inputOp = op => {
+  if (stored !== null && pending) {
+    stored = String(apply(stored, current, pending));
+  } else {
+    stored = current;
+  }
+  current = '0';
+  pending = op;
+  display.textContent = stored;
+};
+const equals = () => {
+  if (stored !== null && pending) {
+    const r = apply(stored, current, pending);
+    display.textContent = r;
+    current = String(r);
+    stored = null; pending = null;
+  }
+};
+const clear = () => { current = '0'; stored = null; pending = null; display.textContent = '0'; };
+const decimal = () => { if (!current.includes('.')) { current += '.'; display.textContent = current; } };
+const digits = {zero:'0', one:'1', two:'2', three:'3', four:'4', five:'5', six:'6', seven:'7', eight:'8', nine:'9'};
+Object.entries(digits).forEach(([id, d]) => document.getElementById(id).onclick = () => inputDigit(d));
+document.getElementById('add').onclick = () => inputOp('+');
+document.getElementById('subtract').onclick = () => inputOp('-');
+document.getElementById('multiply').onclick = () => inputOp('*');
+document.getElementById('divide').onclick = () => inputOp('/');
+document.getElementById('equals').onclick = equals;
+document.getElementById('clear').onclick = clear;
+document.getElementById('decimal').onclick = decimal;
+</script>
+</body>
+</html>

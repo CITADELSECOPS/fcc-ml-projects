@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>25 + 5 Clock</title>
+<style>button { padding: 0.5rem 1rem; margin: 0.2rem; } #time-left { font-size: 3rem; }</style>
+</head>
+<body>
+<div>
+<h2 id="break-label">Break Length</h2>
+<button id="break-decrement">-</button>
+<span id="break-length">5</span>
+<button id="break-increment">+</button>
+</div>
+<div>
+<h2 id="session-label">Session Length</h2>
+<button id="session-decrement">-</button>
+<span id="session-length">25</span>
+<button id="session-increment">+</button>
+</div>
+<div>
+<h2 id="timer-label">Session</h2>
+<div id="time-left">25:00</div>
+<button id="start_stop">Start/Stop</button>
+<button id="reset">Reset</button>
+<audio id="beep" src="https://goo.gl/65cBl1"></audio>
+</div>
+<script>
+let breakLen = 5, sessionLen = 25, timeLeft = 25 * 60;
+let timerType = 'Session', running = false, interval = null;
+const $ = id => document.getElementById(id);
+function format(s) {
+  const m = Math.floor(s / 60), r = s % 60;
+  return String(m).padStart(2, '0') + ':' + String(r).padStart(2, '0');
+}
+function render() {
+  $('break-length').textContent = breakLen;
+  $('session-length').textContent = sessionLen;
+  $('time-left').textContent = format(timeLeft);
+  $('timer-label').textContent = timerType;
+}
+function tick() {
+  timeLeft--;
+  if (timeLeft < 0) {
+    $('beep').play();
+    timerType = timerType === 'Session' ? 'Break' : 'Session';
+    timeLeft = (timerType === 'Session' ? sessionLen : breakLen) * 60;
+  }
+  render();
+}
+$('break-increment').onclick = () => { if (!running && breakLen < 60) breakLen++; render(); };
+$('break-decrement').onclick = () => { if (!running && breakLen > 1) breakLen--; render(); };
+$('session-increment').onclick = () => { if (!running && sessionLen < 60) { sessionLen++; if (timerType === 'Session') timeLeft = sessionLen * 60; } render(); };
+$('session-decrement').onclick = () => { if (!running && sessionLen > 1) { sessionLen--; if (timerType === 'Session') timeLeft = sessionLen * 60; } render(); };
+$('start_stop').onclick = () => {
+  if (!running) { interval = setInterval(tick, 1000); running = true; }
+  else { clearInterval(interval); running = false; }
+};
+$('reset').onclick = () => {
+  clearInterval(interval); running = false;
+  breakLen = 5; sessionLen = 25; timerType = 'Session'; timeLeft = 25 * 60;
+  $('beep').pause(); $('beep').currentTime = 0;
+  render();
+};
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Monthly Global Temperature</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+<h1 id="title">Monthly Global Land-Surface Temperature</h1>
+<h3 id="description">1753 - 2015: base temperature 8.66°C</h3>
+<svg id="chart" width="1200" height="500"></svg>
+<div id="legend"><svg width="400" height="40"></svg></div>
+<div id="tooltip" style="position: absolute; opacity: 0;"></div>
+<script>
+d3.json("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json").then(data => {
+  const base = data.baseTemperature;
+  const ds = data.monthlyVariance;
+  const svg = d3.select("#chart");
+  const m = {top: 20, right: 20, bottom: 60, left: 80};
+  const w = 1200 - m.left - m.right, h = 500 - m.top - m.bottom;
+  const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+  const x = d3.scaleBand().domain([...new Set(ds.map(d => d.year))]).range([0, w]);
+  const y = d3.scaleBand().domain(d3.range(0, 12)).range([0, h]);
+  g.append("g").attr("id", "x-axis").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x).tickValues(x.domain().filter(y => y % 10 === 0)));
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  g.append("g").attr("id", "y-axis").call(d3.axisLeft(y).tickFormat(i => months[i]));
+  const colorScale = d3.scaleQuantize().domain([d3.min(ds, d => base + d.variance), d3.max(ds, d => base + d.variance)]).range(["#053061","#2166ac","#67a9cf","#fddbc7","#ef8a62","#b2182b"]);
+  g.selectAll("rect").data(ds).enter().append("rect")
+    .attr("class", "cell")
+    .attr("data-month", d => d.month - 1)
+    .attr("data-year", d => d.year)
+    .attr("data-temp", d => base + d.variance)
+    .attr("x", d => x(d.year)).attr("y", d => y(d.month - 1))
+    .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+    .attr("fill", d => colorScale(base + d.variance));
+});
+</script>
+</body>
+</html>

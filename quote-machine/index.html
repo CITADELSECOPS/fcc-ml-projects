@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Random Quote Machine</title></head>
+<body>
+<div id="quote-box">
+<p id="text">"The journey of a thousand miles begins with one step."</p>
+<p id="author">- Lao Tzu</p>
+<button id="new-quote">New Quote</button>
+<a id="tweet-quote" href="https://twitter.com/intent/tweet">Tweet</a>
+</div>
+<script>
+const quotes = [
+  {text: "Life is what happens to you while you're busy making other plans.", author: "John Lennon"},
+  {text: "The only way to do great work is to love what you do.", author: "Steve Jobs"},
+  {text: "Innovation distinguishes between a leader and a follower.", author: "Steve Jobs"},
+  {text: "Get busy living or get busy dying.", author: "Stephen King"}
+];
+document.getElementById('new-quote').onclick = () => {
+  const q = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById('text').textContent = '"' + q.text + '"';
+  document.getElementById('author').textContent = '- ' + q.author;
+};
+</script>
+</body>
+</html>

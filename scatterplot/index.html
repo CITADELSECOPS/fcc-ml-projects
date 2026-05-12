@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Doping in Cyclist Races</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+<h1 id="title">Doping in Professional Bicycle Racing</h1>
+<svg id="chart" width="900" height="500"></svg>
+<div id="legend"></div>
+<div id="tooltip" style="position: absolute; opacity: 0; background: #000; color: #fff; padding: 4px;"></div>
+<script>
+d3.json("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json").then(data => {
+  const svg = d3.select("#chart");
+  const m = {top: 20, right: 20, bottom: 40, left: 60};
+  const w = 900 - m.left - m.right, h = 500 - m.top - m.bottom;
+  const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+  const x = d3.scaleLinear().domain(d3.extent(data, d => d.Year)).range([0, w]);
+  const y = d3.scaleTime().domain(d3.extent(data, d => new Date(d.Seconds * 1000))).range([0, h]);
+  g.append("g").attr("id", "x-axis").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x).tickFormat(d3.format("d")));
+  g.append("g").attr("id", "y-axis").call(d3.axisLeft(y).tickFormat(d3.timeFormat("%M:%S")));
+  g.selectAll("circle").data(data).enter().append("circle")
+    .attr("class", "dot")
+    .attr("data-xvalue", d => d.Year)
+    .attr("data-yvalue", d => new Date(d.Seconds * 1000))
+    .attr("cx", d => x(d.Year)).attr("cy", d => y(new Date(d.Seconds * 1000)))
+    .attr("r", 6).attr("fill", d => d.Doping ? "red" : "green");
+});
+</script>
+</body>
+</html>

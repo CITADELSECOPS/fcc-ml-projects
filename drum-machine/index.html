@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Drum Machine</title>
+<style>.drum-pad { display: inline-block; padding: 1rem; margin: 0.5rem; background: #444; color: #fff; cursor: pointer; }</style>
+</head>
+<body>
+<div id="drum-machine">
+<div id="display"></div>
+<button class="drum-pad" id="heater-1" data-key="Q">Q
+<audio class="clip" id="Q" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"></audio></button>
+<button class="drum-pad" id="heater-2" data-key="W">W
+<audio class="clip" id="W" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3"></audio></button>
+<button class="drum-pad" id="heater-3" data-key="E">E
+<audio class="clip" id="E" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3"></audio></button>
+<button class="drum-pad" id="heater-4" data-key="A">A
+<audio class="clip" id="A" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3"></audio></button>
+<button class="drum-pad" id="clap" data-key="S">S
+<audio class="clip" id="S" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3"></audio></button>
+<button class="drum-pad" id="open-hh" data-key="D">D
+<audio class="clip" id="D" src="https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3"></audio></button>
+<button class="drum-pad" id="kick-n-hat" data-key="Z">Z
+<audio class="clip" id="Z" src="https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3"></audio></button>
+<button class="drum-pad" id="kick" data-key="X">X
+<audio class="clip" id="X" src="https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3"></audio></button>
+<button class="drum-pad" id="closed-hh" data-key="C">C
+<audio class="clip" id="C" src="https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3"></audio></button>
+</div>
+<script>
+function play(key) {
+  const audio = document.getElementById(key);
+  if (!audio) return;
+  audio.currentTime = 0;
+  audio.play();
+  document.getElementById('display').textContent = audio.parentElement.id;
+}
+document.querySelectorAll('.drum-pad').forEach(p => p.onclick = () => play(p.dataset.key));
+document.addEventListener('keydown', e => play(e.key.toUpperCase()));
+</script>
+</body>
+</html>
