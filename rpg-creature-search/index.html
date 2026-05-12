@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>RPG Creature Search</title></head>
+<body>
+<h1>RPG Creature Search App</h1>
+<input id="search-input" placeholder="Enter creature name or id">
+<button id="search-button">Search</button>
+<div id="result">
+<div id="creature-name"></div>
+<div id="creature-id"></div>
+<div id="weight"></div>
+<div id="height"></div>
+<div id="types"></div>
+<div id="hp"></div>
+<div id="attack"></div>
+<div id="defense"></div>
+<div id="special-attack"></div>
+<div id="special-defense"></div>
+<div id="speed"></div>
+</div>
+<script>
+document.getElementById('search-button').onclick = async () => {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  try {
+    const res = await fetch(`https://rpg-creature-api.freecodecamp.rocks/api/creature/${q}`);
+    if (!res.ok) throw new Error('Creature not found');
+    const d = await res.json();
+    document.getElementById('creature-name').textContent = d.name.toUpperCase();
+    document.getElementById('creature-id').textContent = '#' + d.id;
+    document.getElementById('weight').textContent = 'Weight: ' + d.weight;
+    document.getElementById('height').textContent = 'Height: ' + d.height;
+    document.getElementById('types').textContent = d.types.map(t => t.name).join(', ');
+    d.stats.forEach(s => {
+      const el = document.getElementById(s.name.replace('-', '-'));
+      if (el) el.textContent = s.base_stat;
+    });
+  } catch (e) { alert('Creature not found'); }
+};
+</script>
+</body>
+</html>
